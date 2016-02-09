@@ -1,13 +1,29 @@
-# Running RancherOS on MS Azure cloud
+# Running RancherOS on MS Azure cloud (for mac users)
 
 ## Prerequisites
 
 - [MS Azure account](http://azure.microsoft.com/)
 - [Azure CLI](https://github.com/Azure/azure-xplat-cli)
 - [Connect Azure CLI to your subscription](http://azure.microsoft.com/en-us/documentation/articles/xplat-cli/#configure)
-- installed packages: apg, jq
 - you are logged in with `azure` CLI
+- [Homebrew](http://brew.sh)
+ 
 
+### Installing required packages
+#### Azure CLI
+```bash
+brew install azure-cli
+```
+
+#### APG
+```bash
+brew install apg
+```
+
+#### JQ
+```bash
+brew install jq
+```
 
 ## Build the image
 
