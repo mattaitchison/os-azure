@@ -1,41 +1,24 @@
 #cloud-config
 rancher:
-
-#  cloud_init:
-#    datasources:
-#    - waagent
-
+  cloud_init:
+    datasources:
+      - waagent
   services:
     waagent:
       image: waagent
       command: -daemon
       privileged: true
       restart: always
+      environment:
+        DISTRO_NAME: RancherOS
       labels:
-      - io.rancher.os.scope=system
+        io.rancher.os.scope: system
+        io.rancher.os.after: cloud-init-pre
       volumes_from:
       - all-volumes
       volumes:
       - /var/lib/waagent:/var/lib/waagent
-      links:
-      - console
-      - preload-system-images
-      - network
       net: host
       uts: host
       ipc: host
       pid: host
-
-    sshwatcher:
-      privileged: true
-      restart: always
-      labels:
-      - io.rancher.os.scope=system
-      volumes_from:
-      - user-volumes
-      links:
-      - waagent
-      image: sshwatcher
-
-  services_include:
-    debian-console: true

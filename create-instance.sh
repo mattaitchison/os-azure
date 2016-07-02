@@ -11,11 +11,10 @@ cd $(dirname $0)
 
 . ./common.sh
 
-VM_IMAGE=CoreOS:CoreOS:Alpha:738.1.0
 VM_NAME=vm-$(apg -a 1 -n 1 -m 7 -x 7 -M NL)
 VM_HOST=${VM_NAME}.westus.cloudapp.azure.com
 
-azure vm create -g ros-build \
+azure vm create -g ros-build2 \
     -o rancheros \
     -Q ${VM_IMAGE} \
     -n ${VM_NAME} \

@@ -11,21 +11,22 @@ cd $(dirname $0)
 
 . ./common.sh
 
-VM_DISK="https://rancheros.blob.core.windows.net/vhds/build-81mqssr-20150716-194433715.vhd"
+VM_DISK="https://rancheroso3.blob.core.windows.net/vhds/build-ll2ftc6-20160701-153649462.vhd"
 VM_NAME=vm-$(apg -a 1 -n 1 -m 7 -x 7 -M NL)
 VM_HOST=${VM_NAME}.westus.cloudapp.azure.com
 
 azure vm create -g ros-build \
-    -o rancheros \
-    -d ${VM_DISK} \
+    -o rancheroso3 \
+    -Q ${VM_DISK} \
     -n ${VM_NAME} \
     -i ${VM_NAME}-ip \
     -w ${VM_NAME} \
     -f ${VM_NAME}-nic \
     -F ${VM_NAME}-vnet -P ${VNET_PREFIX} -j sub1 -k ${VNET_SUBNET} \
-    -z Standard_D2 -l westus -y Linux \
+    -z Standard_DS2_v2 -l westus -y Linux \
     -M ${USER_PUB} \
-    -u rancher -p ${USER_PASS}
+    -u rancher -p ${USER_PASS} \
+    --custom-data cloud-config.yml
 
 echo ssh -F ./ssh_config_term -i ${USER_KEY} rancher@${VM_HOST}
 
